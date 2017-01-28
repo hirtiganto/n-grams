@@ -46,8 +46,9 @@ function Arm(index, n, widht, height) {
   this.radius = height / 3
   this.angle = 360 / n * index
 
-  this.x = cos(this.angle) * this.radius + width / 2
-  this.y = sin(this.angle) * this.radius + height / 2
+  this.location = createVector(0, 0)
+  this.location.x = cos(this.angle) * this.radius + width / 2
+  this.location.y = sin(this.angle) * this.radius + height / 2
 
   this.diameter = 15
   this.skips = 0
@@ -65,7 +66,7 @@ function Arm(index, n, widht, height) {
   this.render = function() {
     noStroke()
     fill(255)
-    ellipse(this.x,this.y,this.diameter,this.diameter)
+    ellipse(this.location.x,this.location.y,this.diameter,this.diameter)
   }
 
 
@@ -76,7 +77,7 @@ function Arm(index, n, widht, height) {
       i -= others.length
     }
 
-    line(this.x,this.y,others[i].x, others[i].y)
+    line(this.location.x,this.location.y,others[i].location.x, others[i].location.y)
   }
 
 }
