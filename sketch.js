@@ -1,5 +1,6 @@
 var canvas
 var movers = []
+var pSlider, slider, previousValue
 
 function setup() {
   canvas = createCanvas(windowWidth,windowHeight)
@@ -7,15 +8,32 @@ function setup() {
   canvas.style('z-index', -1)
   angleMode(DEGREES)
 
-  var arms = 5
-  for (var i = 0; i < arms; i++) {
-    movers.push(new Mover(i, arms, width, height))
+  pSlider = createElement('p', 'Change the amount of arms')
+  pSlider.style('color', 'white')
+  slider = createSlider(3, 50, 5)
+  previousValue = slider.value()
+
+  for (var i = 0; i < slider.value(); i++) {
+    movers.push(new Mover(i, slider.value(), width, height))
   }
+}
+
+
+function changeArms() {
+  var m = []
+  for (var i = 0; i < slider.value(); i++) {
+    m.push(new Mover(i, slider.value(), width, height))
+  }
+  return m
 }
 
 
 function draw() {
   background(242, 2, 106)
+
+  if (slider.value() != previousValue) {
+    movers = changeArms()
+  }
 
   for (var i = 0; i < movers.length; i++) {
     movers[i].render()
@@ -31,7 +49,7 @@ function Mover(index, n, widht, height) {
   this.x = cos(this.angle) * this.radius + width / 2
   this.y = sin(this.angle) * this.radius + height / 2
 
-  this.diameter = 25
+  this.diameter = 15
   this.skips = 0
 
   // so this is my fancy way of determining on how many arms do i have to skip
