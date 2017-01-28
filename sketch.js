@@ -32,7 +32,6 @@ function Mover(index, n, widht, height) {
   this.y = sin(this.angle) * this.radius + height / 2
 
   this.diameter = 25
-
   this.skips = 0
 
   // so this is my fancy way of determining on how many arms do i have to skip
@@ -44,15 +43,16 @@ function Mover(index, n, widht, height) {
     this.skips = (n - 1) / 2
   }
 
+
   this.render = function() {
     noStroke()
     fill(255)
     ellipse(this.x,this.y,this.diameter,this.diameter)
   }
 
+
   this.drawLine = function(others) {
     stroke(255)
-    //line(this.x,this.y,others[this.getIndex(others)].x,others[this.getIndex(others)].y)
     var i = this.skips + index
     if (i >= others.length) {
       i -= others.length
