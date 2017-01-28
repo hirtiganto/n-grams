@@ -1,5 +1,5 @@
 var canvas
-var movers = []
+var arms = []
 var pSlider, slider, previousValue
 
 function setup() {
@@ -14,17 +14,17 @@ function setup() {
   previousValue = slider.value()
 
   for (var i = 0; i < slider.value(); i++) {
-    movers.push(new Mover(i, slider.value(), width, height))
+    arms.push(new Arm(i, slider.value(), width, height))
   }
 }
 
 
 function changeArms() {
-  var m = []
+  var a = []
   for (var i = 0; i < slider.value(); i++) {
-    m.push(new Mover(i, slider.value(), width, height))
+    a.push(new Arm(i, slider.value(), width, height))
   }
-  return m
+  return a
 }
 
 
@@ -32,17 +32,17 @@ function draw() {
   background(242, 2, 106)
 
   if (slider.value() != previousValue) {
-    movers = changeArms()
+    arms = changeArms()
   }
 
-  for (var i = 0; i < movers.length; i++) {
-    movers[i].render()
-    movers[i].drawLine(movers)
+  for (var i = 0; i < arms.length; i++) {
+    arms[i].render()
+    arms[i].drawLine(arms)
   }
 }
 
 
-function Mover(index, n, widht, height) {
+function Arm(index, n, widht, height) {
   this.radius = height / 3
   this.angle = 360 / n * index
 
